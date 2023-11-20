@@ -1,0 +1,44 @@
+name: lol_stats
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_modular: ^6.3.0
+  http: ^1.1.0
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/assets/images/
+
+  fonts:
+    - family: beaufort-bold
+      fonts:
+        - asset: lib/assets/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Bold.ttf
+
+    - family: beaufort-boldItalic
+      fonts:
+        - asset: lib/assets/fonts/BeaufortForLoL-TTF/BeaufortforLOL-BoldItalic.ttf
+
+    - family: spiegel-bold
+      fonts:
+        - asset: lib/assets/fonts/Spiegel-TTF/Spiegel_TT_Bold.ttf
+
+    - family: friz-bold
+      fonts:
+        - asset: lib/assets/fonts/Friz-Quadrata-Font/Friz Quadrata Bold.otf
