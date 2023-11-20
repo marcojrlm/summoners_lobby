@@ -16,15 +16,32 @@ class Api {
     this.body,
   });
 
-  Future<T> connection<T>() async {
-    final response = await http.post(
-      Uri.parse("$apiUrl/$path?api_key=$apiKey"),
-      headers: {"Content-type": "application/json"},
-      body: body ?? jsonEncode(body),
-    );
+  Future connection() async {
+    print(method);
 
-    print(response);
+    if (method == 'GET') {
+      final response = await http.get(
+        Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+        headers: {"Content-type": "application/json"},
+      );
 
-    return response as T;
+      if (response.statusCode != 200) {
+        throw Exception({'status': response.statusCode, 'body': response.body});
+      }
+
+      return response;
+    }
+    if (method == 'POST') {
+      final response = await http.post(
+          Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+          headers: {"Content-type": "application/json"},
+          body: jsonEncode(body));
+
+      if (response.statusCode != 200) {
+        throw Exception({'status': response.statusCode, 'body': response.body});
+      }
+
+      return response;
+    }
   }
 }

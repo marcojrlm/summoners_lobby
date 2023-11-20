@@ -11,11 +11,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final formKey = GlobalKey<FormState>();
 
+  final formKey = GlobalKey<FormState>();
   var formData = <String, String>{};
   final AuthDomain domain = AuthDomain();
-
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -27,11 +26,11 @@ class _SignInState extends State<SignIn> {
           'lib/assets/images/Grandmaster_Emblem_2022.png',
           width: 250,
         ),
-        const Text('Digite seu nome de usário, invocador'),
+        const Text('Digite seu nome de usuário, invocador'),
         Form(
           key: formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
                 SummonersInput(
