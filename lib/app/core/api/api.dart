@@ -20,8 +20,10 @@ class Api {
     final response = await http.post(
       Uri.parse("$apiUrl/$path?api_key=$apiKey"),
       headers: {"Content-type": "application/json"},
-      body: jsonEncode(body),
+      body: body ?? jsonEncode(body),
     );
+
+    print(response);
 
     return response as T;
   }

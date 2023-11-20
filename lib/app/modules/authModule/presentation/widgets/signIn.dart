@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lol_stats/app/core/widgets/SummonersButton.dart';
 import 'package:lol_stats/app/core/widgets/SummonersInput.dart';
+import 'package:lol_stats/app/modules/authModule/domain/authDomain.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -13,6 +14,9 @@ class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
 
   var formData = <String, String>{};
+  final AuthDomain domain = AuthDomain();
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +30,14 @@ class _SignInState extends State<SignIn> {
         const Text('Digite seu nome de usário, invocador'),
         Form(
           key: formKey,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
               children: [
-                SummonersInput(hint: 'usuário'),
-                SizedBox(height: 25),
+                SummonersInput(
+                  hint: 'usuário',
+                  controller: _controller,
+                ),
               ],
             ),
           ),
@@ -40,7 +46,9 @@ class _SignInState extends State<SignIn> {
           padding: const EdgeInsets.only(bottom: 50),
           child: SummonersButton(
             text: 'login',
-            onTap: () {},
+            onTap: () async {
+              await domain.getAndNavigateToSummunersPage(_controller.text);
+            },
           ),
         )
       ],

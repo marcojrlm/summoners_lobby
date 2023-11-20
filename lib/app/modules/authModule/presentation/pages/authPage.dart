@@ -44,7 +44,7 @@ class AuthPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Align(
+          child: const Align(
             alignment: Alignment.topCenter,
             child: ClipperLobby(widget: SignIn()),
           ),

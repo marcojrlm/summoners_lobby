@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:lol_stats/resources/appColors.dart';
 
 class SummonersInput extends StatelessWidget {
-
   final String? hint;
+  final TextEditingController controller;
 
-  const SummonersInput({super.key, placeholder, this.hint});
+  const SummonersInput({
+    super.key,
+    required this.controller,
+    this.hint,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
