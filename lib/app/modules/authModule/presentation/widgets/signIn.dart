@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
         Padding(
           padding: const EdgeInsets.only(bottom: 50),
           child: SummonersButton(
-            text: 'login',
+            text: 'Buscar',
             onTap: () async {
               await domain.getAndNavigateToSummunersPage(_controller.text);
             },

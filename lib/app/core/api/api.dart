@@ -16,9 +16,34 @@ class Api {
     this.body,
   });
 
-  Future connection() async {
-    print(method);
+  Future connectionBr1() async {
+    if (method == 'GET') {
+      final response = await http.get(
+        Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+        headers: {"Content-type": "application/json"},
+      );
 
+      if (response.statusCode != 200) {
+        throw Exception({'status': response.statusCode, 'body': response.body});
+      }
+
+      return response;
+    }
+    if (method == 'POST') {
+      final response = await http.post(
+          Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+          headers: {"Content-type": "application/json"},
+          body: jsonEncode(body));
+
+      if (response.statusCode != 200) {
+        throw Exception({'status': response.statusCode, 'body': response.body});
+      }
+
+      return response;
+    }
+  }
+
+  Future connectionAmericas() async {
     if (method == 'GET') {
       final response = await http.get(
         Uri.parse("$apiUrl/$path?api_key=$apiKey"),

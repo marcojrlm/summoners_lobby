@@ -5,7 +5,7 @@ class AuthDao {
     final response = await Api(
             path: 'summoner/v4/summoners/by-name/$summonersName',
             method: 'GET')
-        .connection();
+        .connectionBr1();
     return response;
   }
 }
