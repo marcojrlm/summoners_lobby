@@ -4,8 +4,13 @@ import 'package:lol_stats/resources/appColors.dart';
 class SummonersButton extends StatelessWidget {
   final String text;
   final Function onTap;
+  final bool isLoading;
 
-  const SummonersButton({Key? key, required this.text, required this.onTap})
+  const SummonersButton(
+      {Key? key,
+      required this.text,
+      required this.onTap,
+      required this.isLoading})
       : super(key: key);
 
   @override
@@ -21,11 +26,15 @@ class SummonersButton extends StatelessWidget {
           height: 60,
           width: 250,
           child: Center(
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 25),
-            ),
+            child: isLoading
+                ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                : Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 25),
+                  ),
           ),
         ),
       ),

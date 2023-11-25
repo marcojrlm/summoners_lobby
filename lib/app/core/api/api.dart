@@ -6,20 +6,21 @@ import 'package:lol_stats/environments/environments.dart';
 class Api {
   final String method;
   final String path;
+  final String api;
   final Map<String, dynamic>? body;
-  final apiUrl = Environments.apiUrl;
   final apiKey = Environments.apiKey;
 
   Api({
     required this.path,
+    required this.api,
     required this.method,
     this.body,
   });
 
-  Future connectionBr1() async {
+  Future connection() async {
     if (method == 'GET') {
       final response = await http.get(
-        Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+        Uri.parse("$api/$path?api_key=$apiKey"),
         headers: {"Content-type": "application/json"},
       );
 
@@ -30,35 +31,7 @@ class Api {
       return response;
     }
     if (method == 'POST') {
-      final response = await http.post(
-          Uri.parse("$apiUrl/$path?api_key=$apiKey"),
-          headers: {"Content-type": "application/json"},
-          body: jsonEncode(body));
-
-      if (response.statusCode != 200) {
-        throw Exception({'status': response.statusCode, 'body': response.body});
-      }
-
-      return response;
-    }
-  }
-
-  Future connectionAmericas() async {
-    if (method == 'GET') {
-      final response = await http.get(
-        Uri.parse("$apiUrl/$path?api_key=$apiKey"),
-        headers: {"Content-type": "application/json"},
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception({'status': response.statusCode, 'body': response.body});
-      }
-
-      return response;
-    }
-    if (method == 'POST') {
-      final response = await http.post(
-          Uri.parse("$apiUrl/$path?api_key=$apiKey"),
+      final response = await http.post(Uri.parse("$api/$path?api_key=$apiKey"),
           headers: {"Content-type": "application/json"},
           body: jsonEncode(body));
 

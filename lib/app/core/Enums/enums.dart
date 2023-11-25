@@ -1,0 +1,4 @@
+enum LoginButtonState {
+  idle,
+  loading,
+}

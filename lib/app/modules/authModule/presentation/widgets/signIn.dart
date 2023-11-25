@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lol_stats/app/core/Enums/enums.dart';
 import 'package:lol_stats/app/core/widgets/SummonersButton.dart';
 import 'package:lol_stats/app/core/widgets/SummonersInput.dart';
+import 'package:lol_stats/app/modules/authModule/domain/controller/authController.dart';
 import 'package:lol_stats/app/modules/authModule/domain/authDomain.dart';
 
 class SignIn extends StatefulWidget {
@@ -11,11 +14,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   final formKey = GlobalKey<FormState>();
   var formData = <String, String>{};
+  final TextEditingController _textEdding = TextEditingController();
   final AuthDomain domain = AuthDomain();
-  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _SignInState extends State<SignIn> {
               children: [
                 SummonersInput(
                   hint: 'usuário',
-                  controller: _controller,
+                  controller: _textEdding,
                 ),
               ],
             ),
@@ -43,10 +45,17 @@ class _SignInState extends State<SignIn> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 50),
-          child: SummonersButton(
-            text: 'Buscar',
-            onTap: () async {
-              await domain.getAndNavigateToSummunersPage(_controller.text);
+          child: Observer(
+            builder: (_) {
+              return SummonersButton(
+                text: 'Buscar',
+                isLoading: domain.controller.getButtonState() == LoginButtonState.idle
+                    ? false
+                    : true,
+                onTap: () async {
+                  await domain.getAndNavigateToSummunersPage(_textEdding.text);
+                },
+              );
             },
           ),
         )
